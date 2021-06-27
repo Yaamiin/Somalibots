@@ -537,6 +537,9 @@ async def play(_, message: Message):
         if message.reply_to_message
         else None
     )
+    
+    # Making non for being stable
+    audio = None
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             await lel.edit(
