@@ -17,12 +17,17 @@
 
 import requests
 from pyrogram import Client as Bot
+from pyrogram import idle
 
-from DaisyXMusic.config import API_HASH
-from DaisyXMusic.config import API_ID
+from DaisyXMusic.config import API_HASH1
+from DaisyXMusic.config import API_HASH2
+from DaisyXMusic.config import API_ID1
+from DaisyXMusic.config import API_ID2
 from DaisyXMusic.config import BG_IMAGE
 from DaisyXMusic.config import BOT_TOKEN
-from DaisyXMusic.services.callsmusic import run
+from DaisyXMusic.services.callsmusic import run1
+from DaisyXMusic.services.callsmusic import run2
+
 
 response = requests.get(BG_IMAGE)
 file = open("./etc/foreground.png", "wb")
@@ -31,11 +36,15 @@ file.close()
 
 bot = Bot(
     ":memory:",
-    API_ID,
-    API_HASH,
+    API_ID1,
+    API_ID2,
+    API_HASH1,
+    API_HASH2,
     bot_token=BOT_TOKEN,
     plugins=dict(root="DaisyXMusic.modules"),
 )
 
 bot.start()
-run()
+run1()
+run2()
+idle()
