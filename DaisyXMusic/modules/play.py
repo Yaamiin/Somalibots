@@ -53,7 +53,8 @@ from DaisyXMusic.helpers.filters import command
 from DaisyXMusic.helpers.filters import other_filters
 from DaisyXMusic.helpers.gets import get_file_name
 from DaisyXMusic.services.callsmusic import callsmusic
-from DaisyXMusic.services.callsmusic import client as USER
+from DaisyXMusic.services.callsmusic import client1 as USER
+from DaisyXMusic.services.callsmusic import client2 as USER
 from DaisyXMusic.services.converter.converter import convert
 from DaisyXMusic.services.downloaders import youtube
 from DaisyXMusic.services.queues import queues
@@ -78,7 +79,11 @@ def cb_admin_check(func: Callable) -> Callable:
 
 def transcode(filename):
     ffmpeg.input(filename).output(
-        "input.raw", format="s16le", acodec="pcm_s16le", ac=2, ar="48k"
+        "input.raw", 
+        format="s16le", 
+        acodec="pcm_s16le", 
+        ac=2, 
+        ar="48k"
     ).overwrite_output().run()
     os.remove(filename)
 
@@ -572,7 +577,7 @@ async def play(_, message: Message):
     elif urls:
         query = toxt
         await lel.edit("🎵 <b>Processing</b>")
-        ydl_opts = {"format": "bestaudio[ext=m4a]"}
+        ydl_opts = {"format": "bestaudio/best"}
         try:
             results = YoutubeSearch(query, max_results=1).to_dict()
             url = f"https://youtube.com{results[0]['url_suffix']}"
@@ -626,7 +631,7 @@ async def play(_, message: Message):
             query += " " + str(i)
         print(query)
         await lel.edit("🎵 **Processing**")
-        ydl_opts = {"format": "bestaudio[ext=m4a]"}
+        ydl_opts = {"format": "bestaudio/best"}
         
         try:
           results = YoutubeSearch(query, max_results=5).to_dict()
@@ -823,7 +828,7 @@ async def ytplay(_, message: Message):
         query += " " + str(i)
     print(query)
     await lel.edit("🎵 <b>Processing</b>")
-    ydl_opts = {"format": "bestaudio[ext=m4a]"}
+    ydl_opts = {"format": "bestaudio/best"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
         url = f"https://youtube.com{results[0]['url_suffix']}"
@@ -911,143 +916,6 @@ async def ytplay(_, message: Message):
         os.remove("final.png")
         return await lel.delete()
     
-@Client.on_message(filters.command("dplay") & filters.group & ~filters.edited)
-async def deezer(client: Client, message_: Message):
-    if message_.chat.id in DISABLED_GROUPS:
-        return
-    global que
-    lel = await message_.reply("🔄 <b>Processing</b>")
-    administrators = await get_administrators(message_.chat)
-    chid = message_.chat.id
-    try:
-        user = await USER.get_me()
-    except:
-        user.first_name = "DaisyMusic"
-    usar = user
-    wew = usar.id
-    try:
-        # chatdetails = await USER.get_chat(chid)
-        await client.get_chat_member(chid, wew)
-    except:
-        for administrator in administrators:
-            if administrator == message_.from_user.id:
-                if message_.chat.title.startswith("Channel Music: "):
-                    await lel.edit(
-                        "<b>Remember to add helper to your channel</b>",
-                    )
-                    pass
-                try:
-                    invitelink = await client.export_chat_invite_link(chid)
-                except:
-                    await lel.edit(
-                        "<b>Add me as admin of yor group first</b>",
-                    )
-                    return
-
-                try:
-                    await USER.join_chat(invitelink)
-                    await USER.send_message(
-                        message_.chat.id, "I joined this group for playing music in VC"
-                    )
-                    await lel.edit(
-                        "<b>helper userbot joined your chat</b>",
-                    )
-
-                except UserAlreadyParticipant:
-                    pass
-                except Exception:
-                    # print(e)
-                    await lel.edit(
-                        f"<b>🔴 Flood Wait Error 🔴 \nUser {user.first_name} couldn't join your group due to heavy requests for userbot! Make sure user is not banned in group."
-                        "\n\nOr manually add assistant to your Group and try again</b>",
-                    )
-    try:
-        await USER.get_chat(chid)
-        # lmoa = await client.get_chat_member(chid,wew)
-    except:
-        await lel.edit(
-            f"<i> {user.first_name} Userbot not in this chat, Ask admin to send /play command for first time or add {user.first_name} manually</i>"
-        )
-        return
-    requested_by = message_.from_user.first_name
-
-    text = message_.text.split(" ", 1)
-    queryy = text[1]
-    query = queryy
-    res = lel
-    await res.edit(f"Searching 🔍 for `{queryy}` on deezer")
-    try:
-        songs = await arq.deezer(query,1)
-        if not songs.ok:
-            await message_.reply_text(songs.result)
-            return
-        title = songs.result[0].title
-        url = songs.result[0].url
-        artist = songs.result[0].artist
-        duration = songs.result[0].duration
-        thumbnail = "https://telegra.ph/file/f6086f8909fbfeb0844f2.png"
-
-    except:
-        await res.edit("Found Literally Nothing, You Should Work On Your English!")
-        return
-    try:    
-        duuration= round(duration / 60)
-        if duuration > DURATION_LIMIT:
-            await cb.message.edit(f"Music longer than {DURATION_LIMIT}min are not allowed to play")
-            return
-    except:
-        pass    
-    
-    keyboard = InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton("📖 Playlist", callback_data="playlist"),
-                InlineKeyboardButton("Menu ⏯ ", callback_data="menu"),
-            ],
-            [InlineKeyboardButton(text="Listen On Deezer 🎬", url=f"{url}")],
-            [InlineKeyboardButton(text="❌ Close", callback_data="cls")],
-        ]
-    )
-    file_path = await convert(wget.download(url))
-    await res.edit("Generating Thumbnail")
-    await generate_cover(requested_by, title, artist, duration, thumbnail)
-    chat_id = get_chat_id(message_.chat)
-    if chat_id in callsmusic.active_chats:
-        await res.edit("adding in queue")
-        position = await queues.put(chat_id, file=file_path)
-        qeue = que.get(chat_id)
-        s_name = title
-        r_by = message_.from_user
-        loc = file_path
-        appendable = [s_name, r_by, loc]
-        qeue.append(appendable)
-        await res.edit_text(f"✯{bn}✯= #️⃣ Queued at position {position}")
-    else:
-        await res.edit_text(f"✯{bn}✯=▶️ Playing.....")
-
-        que[chat_id] = []
-        qeue = que.get(chat_id)
-        s_name = title
-        r_by = message_.from_user
-        loc = file_path
-        appendable = [s_name, r_by, loc]
-        qeue.append(appendable)
-        try:
-            await callsmusic.set_stream(chat_id, file_path)
-        except:
-            res.edit("Group call is not connected of I can't join it")
-            return
-
-    await res.delete()
-
-    m = await client.send_photo(
-        chat_id=message_.chat.id,
-        reply_markup=keyboard,
-        photo="final.png",
-        caption=f"Playing [{title}]({url}) Via Deezer",
-    )
-    os.remove("final.png")
-
 
 @Client.on_message(filters.command("splay") & filters.group & ~filters.edited)
 async def jiosaavn(client: Client, message_: Message):
@@ -1341,4 +1209,4 @@ async def _qq(client: Client, message: Message):
         await message.reply("I will not clean old music messages from now.")
     if not input == "on" and not input == "off":
         await message.reply("I only understand by on or off")
-        return    
+        return
