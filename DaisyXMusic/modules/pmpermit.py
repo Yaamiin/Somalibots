@@ -20,7 +20,8 @@ from DaisyXMusic.config import SUDO_USERS
 from DaisyXMusic.config import PMPERMIT
 from pyrogram import filters
 from pyrogram.types import Message
-from DaisyXMusic.services.callsmusic import client as USER
+from DaisyXMusic.services.callsmusic import client1 as USER
+from DaisyXMusic.services.callsmusic import client2 as USER
 
 PMSET =True
 pchats = []
