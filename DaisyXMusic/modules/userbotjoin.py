@@ -21,7 +21,8 @@ from pyrogram.errors import UserAlreadyParticipant
 import asyncio
 from DaisyXMusic.helpers.decorators import authorized_users_only
 from DaisyXMusic.helpers.decorators import errors
-from DaisyXMusic.services.callsmusic import client as USER
+from DaisyXMusic.services.callsmusic import client1 as USER
+from DaisyXMusic.services.callsmusic import client2 as USER
 from DaisyXMusic.config import SUDO_USERS
 
 @Client.on_message(filters.command(["userbotjoin"]) & ~filters.private & ~filters.bot)
@@ -134,4 +135,3 @@ async def addcchannel(client, message):
     await message.reply_text(
         "<b>helper userbot joined your channel</b>",
     )
-    
