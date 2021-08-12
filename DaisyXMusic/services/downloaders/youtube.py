@@ -17,14 +17,13 @@
 # Modified by Inukaasith
 
 from os import path
-
 from youtube_dl import YoutubeDL
 
 from DaisyXMusic.config import DURATION_LIMIT
 from DaisyXMusic.helpers.errors import DurationLimitError
 
 ydl_opts = {
-    "format": "bestaudio[ext=m4a]",
+    "format": "bestaudio/best",
     "geo-bypass": True,
     "nocheckcertificate": True,
     "outtmpl": "downloads/%(id)s.%(ext)s",
