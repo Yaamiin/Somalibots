@@ -55,7 +55,8 @@ from DaisyXMusic.helpers.filters import command
 from DaisyXMusic.helpers.filters import other_filters
 from DaisyXMusic.helpers.gets import get_file_name
 from DaisyXMusic.services.callsmusic import callsmusic
-from DaisyXMusic.services.callsmusic import client as USER
+from DaisyXMusic.services.callsmusic import client1 as USER
+from DaisyXMusic.services.callsmusic import client2 as USER
 from DaisyXMusic.services.converter.converter import convert
 from DaisyXMusic.services.downloaders import youtube
 from DaisyXMusic.services.queues import queues
@@ -892,5 +893,4 @@ async def jiosaavn(client: Client, message_: Message):
         photo="final.png",
         caption=f"Playing {sname} Via Jiosaavn in linked channel",
     )
-    
     os.remove("final.png")
