@@ -23,14 +23,17 @@ if os.path.exists("local.env"):
     load_dotenv("local.env")
 
 que = {}
-SESSION_NAME = getenv("SESSION_NAME", "session")
+SESSION_NAME1 = getenv("SESSION_NAME1", "session1")
+SESSION_NAME2 = getenv("SESSION_NAME2", "session2")
 BOT_TOKEN = getenv("BOT_TOKEN")
 BOT_NAME = getenv("BOT_NAME")
 UPDATES_CHANNEL = getenv("UPDATES_CHANNEL", "DaisyXupdates")
 BG_IMAGE = getenv("BG_IMAGE", "https://telegra.ph/file/dcfdf612e499eef0e0b1f.png")
 admins = {}
-API_ID = int(getenv("API_ID", ""))
-API_HASH = getenv("API_HASH")
+API_ID1 = int(getenv("API_ID1", ""))
+API_ID2 = int(getenv("API_ID2", ""))
+API_HASH1 = getenv("API_HASH1")
+API_HASH2 = getenv("API_HASH2")
 BOT_USERNAME = getenv("BOT_USERNAME")
 ASSISTANT_NAME = getenv("ASSISTANT_NAME", "DaisyXhelper")
 SUPPORT_GROUP = getenv("SUPPORT_GROUP", "DaisySupport_Official")
