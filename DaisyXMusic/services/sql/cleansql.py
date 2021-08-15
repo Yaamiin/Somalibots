@@ -3,7 +3,6 @@ from sqlalchemy import BigInteger, Boolean, Column, String, UnicodeText
 from DaisyXMusic.services.sql import BASE, SESSION
 
 
-
 class Clean(BASE):
     __tablename__ = "clean"
     chat_id = Column(String(14), primary_key=True)
@@ -17,10 +16,7 @@ class Clean(BASE):
         self.chat_id = chat_id
 
 
-
 Clean.__table__.create(checkfirst=True)
-
-
 
 
 def get_current_clean_settings(chat_id):
