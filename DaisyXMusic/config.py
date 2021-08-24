@@ -33,7 +33,6 @@ admins = {}
 API_ID = int(getenv("API_ID", ""))
 API_HASH = getenv("API_HASH")
 BOT_USERNAME = getenv("BOT_USERNAME")
-ASSISTANT_NAME = getenv("ASSISTANT_NAME", "DaisyXhelper")
 SUPPORT_GROUP = getenv("SUPPORT_GROUP", "DaisySupport_Official")
 PROJECT_NAME = getenv("PROJECT_NAME", "DaisyXMusic v5")
 SOURCE_CODE = getenv("SOURCE_CODE", "github.com/TeamOfDaisyX/DaisyXMusic")
