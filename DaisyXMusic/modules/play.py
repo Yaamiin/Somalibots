@@ -173,7 +173,7 @@ async def playlist(client, message):
 
 
 async def updated_stats(chat, queue, vol=100):
-    if chat.id in await callsmusic.pytgcalls.active_calls:
+    if chat.id in await callsmusic.pytgcalls.get_active_call:
         # if chat.id in active_chats:
         stats = "Settings of **{}**".format(chat.title)
         if len(que) > 0:
@@ -231,7 +231,7 @@ async def settings(client, message):
         return    
     playing = None
     chat_id = get_chat_id(message.chat)
-    if chat_id in callsmusic.pytgcalls.active_calls:
+    if chat_id in callsmusic.pytgcalls.get_active_call:
         playing = True
     queue = que.get(chat_id)
     stats = await updated_stats(message.chat, queue)
@@ -340,21 +340,20 @@ async def m_cb(b, cb):
 
     the_data = cb.message.reply_markup.inline_keyboard[1][0].callback_data
     if type_ == "pause":
-        if (chet_id not in await callsmusic.pytgcalls.active_calls) or (
-            await callsmusic.pytgcalls.active_calls[chet_id] == "paused"
+        if (chet_id not in callsmusic.pytgcalls.get_active_call) or (
+            callsmusic.pytgcalls.get_active_call[chet_id] == "paused"
         ):
             await cb.answer("Chat is not connected!", show_alert=True)
         else:
             await callsmusic.pytgcalls.pause_stream(chet_id)
-
             await cb.answer("Music Paused!")
             await cb.message.edit(
                 await updated_stats(m_chat, qeue), reply_markup=r_ply("play")
             )
 
     elif type_ == "play":
-        if (chet_id not in await callsmusic.pytgcalls.active_calls) or (
-            await callsmusic.pytgcalls.active_calls[chet_id] == "playing"
+        if (chet_id not in callsmusic.pytgcalls.get_active_call) or (
+            await callsmusic.pytgcalls.get_active_call[chet_id] == "playing"
         ):
             await cb.answer("Chat is not connected!", show_alert=True)
         else:
@@ -388,21 +387,20 @@ async def m_cb(b, cb):
         await cb.message.edit(msg)
 
     elif type_ == "resume":
-        if (chet_id not in await callsmusic.pytgcalls.active_calls) or (
-            await callsmusic.pytgcalls.active_calls[chet_id] == "playing"
+        if (chet_id not in callsmusic.pytgcalls.get_active_call) or (
+            callsmusic.pytgcalls.get_active_call[chet_id] == "playing"
         ):
             await cb.answer("Chat is not connected or already playng", show_alert=True)
         else:
             await callsmusic.pytgcalls.resume_stream(chet_id)
             await cb.answer("Music Resumed!")
     elif type_ == "puse":
-        if (chet_id not in await callsmusic.pytgcalls.active_calls) or (
-            await callsmusic.pytgcalls.active_calls[chet_id] == "paused"
+        if (chet_id not in allsmusic.pytgcalls.get_active_call) or (
+            await callsmusic.pytgcalls.get_active_call[chet_id] == "paused"
         ):
             await cb.answer("Chat is not connected or already paused", show_alert=True)
         else:
             await callsmusic.pytgcalls.pause_stream(chet_id)
-
             await cb.answer("Music Paused!")
     elif type_ == "cls":
         await cb.answer("Closed menu")
@@ -431,14 +429,12 @@ async def m_cb(b, cb):
     elif type_ == "skip":
         if qeue:
             qeue.pop(0)
-        if chet_id not in await callsmusic.pytgcalls.active_calls:
+        if chet_id not in callsmusic.pytgcalls.get_active_call:
             await cb.answer("Chat is not connected!", show_alert=True)
         else:
             queues.task_done(chet_id)
-
             if queues.is_empty(chet_id):
                 await callsmusic.pytgcalls.leave_group_call(chet_id)
-
                 await cb.message.edit("- No More Playlist..\n- Leaving VC!")
             else:
                 await callsmusic.pytgcalls.change_stream(
@@ -451,12 +447,11 @@ async def m_cb(b, cb):
                 )
 
     else:
-        if chet_id in await callsmusic.pytgcalls.active_calls:
+        if chet_id in await callsmusic.pytgcalls.get_active_call:
             try:
                 queues.clear(chet_id)
             except QueueEmpty:
                 pass
-
             await callsmusic.pytgcalls.leave_group_call(chet_id)
             await cb.message.edit("Successfully Left the Chat!")
         else:
@@ -658,17 +653,14 @@ async def play(_, message: Message):
                         InlineKeyboardButton("5️⃣", callback_data=f'plll 4|{query}|{user_id}'),
                     ],
                     [
-                        InlineKeyboardButton(text="Close 🛑", callback_data="cls")
+                        InlineKeyboardButton(text="❌ Close", callback_data="cls")
                     ],
                 ]
             )       
             await lel.edit(toxxt,reply_markup=koyboard,disable_web_page_preview=True)
-            # WHY PEOPLE ALWAYS LOVE PORN ?? (A point to think)
             return
-            # Returning to pornhub
         except:
-            await lel.edit("No Enough results to choose.. Starting direct play..")
-                        
+            await lel.edit("No Enough results to choose.. Starting direct play")             
             # print(results)
             try:
                 url = f"https://youtube.com{results[0]['url_suffix']}"
@@ -708,7 +700,7 @@ async def play(_, message: Message):
             await generate_cover(requested_by, title, views, duration, thumbnail)
             file_path = await convert(youtube.download(url))   
     chat_id = get_chat_id(message.chat)
-    if chat_id in await callsmusic.pytgcalls.active_calls:
+    if chat_id in callsmusic.pytgcalls.get_active_call:
         position = await queues.put(chat_id, file=file_path)
         qeue = que.get(chat_id)
         s_name = title
@@ -858,7 +850,7 @@ async def ytplay(_, message: Message):
     await generate_cover(requested_by, title, views, duration, thumbnail)
     file_path = await convert(youtube.download(url))
     chat_id = get_chat_id(message.chat)
-    if chat_id in await callsmusic.pytgcalls.active_calls:
+    if chat_id in callsmusic.pytgcalls.get_active_call:
         position = await queues.put(chat_id, file=file_path)
         qeue = que.get(chat_id)
         s_name = title
@@ -961,7 +953,7 @@ async def jiosaavn(client: Client, message_: Message):
     text = message_.text.split(" ", 1)
     query = text[1]
     res = lel
-    await res.edit(f"Searching 👀👀👀 for `{query}` on jio saavn")
+    await res.edit(f"Searching 🔍  for `{query}` on jio saavn")
     
     # ================== Copied from https://github.com/TheHamkerCat/WilliamButcherBot/blob/dev/wbb/modules/music.py line 170 ===============
     
@@ -1025,7 +1017,7 @@ async def jiosaavn(client: Client, message_: Message):
     )
     file_path = await convert(wget.download(slink))
     chat_id = get_chat_id(message_.chat)
-    if chat_id in await callsmusic.pytgcalls.active_calls:
+    if chat_id in callsmusic.pytgcalls.get_active_call:
         position = await queues.put(chat_id, file=file_path)
         qeue = que.get(chat_id)
         s_name = sname
@@ -1133,7 +1125,7 @@ async def lol_cb(b, cb):
     requested_by = useer_name
     await generate_cover(requested_by, title, views, duration, thumbnail)
     file_path = await convert(youtube.download(url))  
-    if chat_id in await callsmusic.pytgcalls.active_calls:
+    if chat_id in callsmusic.pytgcalls.get_active_call:
         position = await queues.put(chat_id, file=file_path)
         qeue = que.get(chat_id)
         s_name = title
@@ -1147,7 +1139,7 @@ async def lol_cb(b, cb):
         await cb.message.delete()
         await b.send_photo(chat_id,
             photo="final.png",
-            caption=f"#⃣  Song requested by {r_by.mention} **queued** at position {position}!",
+            caption=f"#⃣  Song requested by {r_by.mention()} **queued** at position {position}!",
             reply_markup=keyboard,
         )
         os.remove("final.png")
@@ -1163,12 +1155,11 @@ async def lol_cb(b, cb):
         loc = file_path
         appendable = [s_name, r_by, loc]
         qeue.append(appendable)
-
         await callsmusic.pytgcalls.join_group_call(chat_id, file_path)
         await cb.message.delete()
         await b.send_photo(chat_id,
             photo="final.png",
             reply_markup=keyboard,
-            caption=f"▶️ **Playing** here the song requested by {r_by.mention} via Youtube Music 😜",
+            caption=f"▶️ **Playing** here the song requested by {r_by.mention()} via Youtube Music 😜",
         )
         os.remove("final.png")
