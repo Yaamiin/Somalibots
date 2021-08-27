@@ -172,8 +172,8 @@ async def playlist(client, message):
 # ============================= Settings =========================================
 
 
-def updated_stats(chat, queue, vol=100):
-    if chat.id in callsmusic.pytgcalls.active_calls:
+async def updated_stats(chat, queue, vol=100):
+    if chat.id in await callsmusic.pytgcalls.active_calls:
         # if chat.id in active_chats:
         stats = "Settings of **{}**".format(chat.title)
         if len(que) > 0:
@@ -216,7 +216,7 @@ async def ee(client, message):
     if message.chat.id in DISABLED_GROUPS:
         return
     queue = que.get(message.chat.id)
-    stats = updated_stats(message.chat, queue)
+    stats = await updated_stats(message.chat, queue)
     if stats:
         await message.reply(stats)
     else:
@@ -234,7 +234,7 @@ async def settings(client, message):
     if chat_id in callsmusic.pytgcalls.active_calls:
         playing = True
     queue = que.get(chat_id)
-    stats = updated_stats(message.chat, queue)
+    stats = await updated_stats(message.chat, queue)
     if stats:
         if playing:
             await message.reply(stats, reply_markup=r_ply("pause"))
@@ -349,7 +349,7 @@ async def m_cb(b, cb):
 
             await cb.answer("Music Paused!")
             await cb.message.edit(
-                updated_stats(m_chat, qeue), reply_markup=r_ply("play")
+                await updated_stats(m_chat, qeue), reply_markup=r_ply("play")
             )
 
     elif type_ == "play":
@@ -361,7 +361,7 @@ async def m_cb(b, cb):
             await callsmusic.pytgcalls.resume_stream(chet_id)
             await cb.answer("Music Resumed!")
             await cb.message.edit(
-                updated_stats(m_chat, qeue), reply_markup=r_ply("pause")
+                await updated_stats(m_chat, qeue), reply_markup=r_ply("pause")
             )
 
     elif type_ == "playlist":
@@ -409,7 +409,7 @@ async def m_cb(b, cb):
         await cb.message.delete()
 
     elif type_ == "menu":
-        stats = updated_stats(cb.message.chat, qeue)
+        stats = await updated_stats(cb.message.chat, qeue)
         await cb.answer("Menu opened")
         marr = InlineKeyboardMarkup(
             [
