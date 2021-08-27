@@ -80,8 +80,8 @@ async def deautenticate(client, message):
 @authorized_users_only
 async def pause(_, message: Message):
     chat_id = get_chat_id(message.chat)
-    if (chat_id not in await callsmusic.pytgcalls.active_calls) or (
-        await callsmusic.pytgcalls.active_calls[chat_id] == "paused"
+    if (chat_id not in callsmusic.pytgcalls.calls) or (
+        callsmusic.pytgcalls.calls[chat_id] == "paused"
     ):
         await message.reply_text("❗ Nothing is playing!")
     else:
@@ -94,8 +94,8 @@ async def pause(_, message: Message):
 @authorized_users_only
 async def resume(_, message: Message):
     chat_id = get_chat_id(message.chat)
-    if (chat_id not in await callsmusic.pytgcalls.active_calls) or (
-        await callsmusic.pytgcalls.active_calls[chat_id] == "playing"
+    if (chat_id not in callsmusic.pytgcalls.calls) or (
+        callsmusic.pytgcalls.calls[chat_id] == "playing"
     ):
         await message.reply_text("❗ Nothing is paused!")
     else:
@@ -108,7 +108,7 @@ async def resume(_, message: Message):
 @authorized_users_only
 async def stop(_, message: Message):
     chat_id = get_chat_id(message.chat)
-    if chat_id not in await callsmusic.pytgcalls.active_calls:
+    if chat_id not in callsmusic.pytgcalls.calls:
         await message.reply_text("❗ Nothing is streaming!")
     else:
         try:
@@ -126,7 +126,7 @@ async def stop(_, message: Message):
 async def skip(_, message: Message):
     global que
     chat_id = get_chat_id(message.chat)
-    if chat_id not in await callsmusic.pytgcalls.active_calls:
+    if chat_id not in callsmusic.pytgcalls.calls:
         await message.reply_text("❗ Nothing is playing to skip!")
     else:
         queues.task_done(chat_id)
