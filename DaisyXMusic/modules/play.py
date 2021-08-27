@@ -328,9 +328,9 @@ async def m_cb(b, cb):
     global que
     if (
         cb.message.chat.title.startswith("Channel Music: ")
-        and chat.title[14:].isnumeric()
+        and cb.message.chat.title[14:].isnumeric()
     ):
-        chet_id = int(chat.title[13:])
+        chet_id = int(cb.message.chat.title[13:])
     else:
         chet_id = cb.message.chat.id
     qeue = que.get(chet_id)
