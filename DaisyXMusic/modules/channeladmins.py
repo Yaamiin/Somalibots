@@ -42,8 +42,8 @@ async def pause(_, message: Message):
       await message.reply("Is chat even linked")
       return    
     chat_id = chid
-    if (chat_id not in await callsmusic.pytgcalls.active_calls) or (
-        await callsmusic.pytgcalls.active_calls[chat_id] == "paused"
+    if (chat_id not in callsmusic.pytgcalls.get_active_call) or (
+        callsmusic.pytgcalls.get_active_call[chat_id] == "paused"
     ):
         await message.reply_text("❗ Nothing is playing!")
     else:
@@ -63,8 +63,8 @@ async def resume(_, message: Message):
       await message.reply("Is chat even linked")
       return    
     chat_id = chid
-    if (chat_id not in await callsmusic.pytgcalls.active_calls) or (
-        await callsmusic.pytgcalls.active_calls[chat_id] == "playing"
+    if (chat_id not in callsmusic.pytgcalls.get_active_call) or (
+        callsmusic.pytgcalls.get_active_call[chat_id] == "playing"
     ):
         await message.reply_text("❗ Nothing is paused!")
     else:
@@ -84,7 +84,7 @@ async def stop(_, message: Message):
       await message.reply("Is chat even linked")
       return    
     chat_id = chid
-    if chat_id not in await callsmusic.pytgcalls.active_calls:
+    if chat_id not in callsmusic.pytgcalls.get_active_call:
         await message.reply_text("❗ Nothing is streaming!")
     else:
         try:
@@ -109,7 +109,7 @@ async def skip(_, message: Message):
       await message.reply("Is chat even linked")
       return    
     chat_id = chid
-    if chat_id not in await callsmusic.pytgcalls.active_calls:
+    if chat_id not in callsmusic.pytgcalls.get_active_call:
         await message.reply_text("❗ Nothing is playing to skip!")
     else:
         queues.task_done(chat_id)
