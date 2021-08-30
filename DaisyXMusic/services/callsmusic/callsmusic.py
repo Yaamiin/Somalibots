@@ -21,26 +21,39 @@ from pytgcalls import GroupCallFactory
 from DaisyXMusic.services.callsmusic import client
 from DaisyXMusic.services.queues import queues
 
+from DaisyXMusic.config import que
 
 instances: Dict[int, GroupCallFactory] = {}
 active_chats: Dict[int, Dict[str, bool]] = {}
 
 
+
+
 def init_instance(chat_id: int):
+    global que, instances, active_chats
     if chat_id not in instances:
-        instances[chat_id] = GroupCallFactory(client,outgoing_audio_bitrate_kbit=512).get_file_group_call()
-
+        instances[chat_id] = GroupCall(client, input_filename='', play_on_repeat=False, enable_logs_to_console=False)
     instance = instances[chat_id]
-
+    
     @instance.on_playout_ended
-    async def ___(__, _):
-        queues.task_done(chat_id)
-
-        if queues.is_empty(chat_id):
-            await stop(chat_id)
+    async def when_the_music_fucking_stops(group_call, filename):
+        a_chat_id = int('-100'+ f'{group_call.full_chat.id}')
+        queue = que.get(a_chat_id)
+        if not len(queue) == 0:
+            queue.pop(0)
+            if not len(queue) == 0:
+                await USER.send_message(a_chat_id, f'- Now Playing : **{queue[0][0]}**\n- Requested by : **{queue[0][1].mention(style="md")}**')
+                group_call.input_filename = queue[0][2]
+            else:
+                await client.send_message(a_chat_id, 'Done Playing.')
+                if a_chat_id in active_chats:
+                    del active_chats[a_chat_id]
+                await group_call.stop()
         else:
-            instance.input_filename = queues.get(chat_id)["file_path"]
-
+            await USER.send_message(a_chat_id, 'Done Playing..')
+            if a_chat_id in active_chats:
+                del active_chats[a_chat_id]
+            await group_call.stop()
 
 def remove(chat_id: int):
     if chat_id in instances:
