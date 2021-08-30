@@ -42,7 +42,7 @@ def init_instance(chat_id: int):
         if not len(queue) == 0:
             queue.pop(0)
             if not len(queue) == 0:
-                await USER.send_message(a_chat_id, f'- Now Playing : **{queue[0][0]}**\n- Requested by : **{queue[0][1].mention(style="md")}**')
+                await client.send_message(a_chat_id, f'- Now Playing : **{queue[0][0]}**\n- Requested by : **{queue[0][1].mention(style="md")}**')
                 group_call.input_filename = queue[0][2]
             else:
                 await client.send_message(a_chat_id, 'Done Playing.')
@@ -50,7 +50,7 @@ def init_instance(chat_id: int):
                     del active_chats[a_chat_id]
                 await group_call.stop()
         else:
-            await USER.send_message(a_chat_id, 'Done Playing..')
+            await client.send_message(a_chat_id, 'Done Playing..')
             if a_chat_id in active_chats:
                 del active_chats[a_chat_id]
             await group_call.stop()
