@@ -1,153 +1,127 @@
-from time import time
-from datetime import datetime
-from config import BOT_USERNAME, BOT_NAME, ASSISTANT_NAME, OWNER_NAME, UPDATES_CHANNEL, GROUP_SUPPORT
-from helpers.filters import command
-from pyrogram import Client, filters
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-from helpers.decorators import sudo_users_only, authorized_users_only
+# Daisyxmusic (Telegram bot project )
+# Copyright (C) 2021  Inukaasith
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+from DaisyXMusic.config import ASSISTANT_NAME, PROJECT_NAME
 
 
-START_TIME = datetime.utcnow()
-START_TIME_ISO = START_TIME.replace(microsecond=0).isoformat()
-TIME_DURATION_UNITS = (
-    ("week", 60 * 60 * 24 * 7),
-    ("days", 60 * 60 * 24),
-    ("h", 60 * 60),
-    ("m", 60),
-    ("s", 1)
-)
+class Messages:
+    START_MSG = "**Hello 👋 [{}](tg://user?id={})!**\n\n🤖 I am an advanced bot created for playing music in the voice chats of Telegram Groups & Channels.\n\n✅ Send me /help for more info."
+    HELP_MSG = [
+        ".",
+        f"""
+**Hey 👋 Welcome back to {PROJECT_NAME}
 
-async def _human_time_duration(seconds):
-    if seconds == 0:
-        return 'inf'
-    parts = []
-    for unit, div in TIME_DURATION_UNITS:
-        amount, seconds = divmod(int(seconds), div)
-        if amount > 0:
-            parts.append('{} {}{}'
-                         .format(amount, unit, "" if amount == 1 else "s"))
-    return ', '.join(parts)
+⚪️ {PROJECT_NAME} can play music in your group's voice chat as well as channel voice chats
 
-
-@Client.on_message(command("start") & filters.private & ~filters.edited)
-async def start_(client: Client, message: Message):
-    await message.reply_text(
-        f"""<b>👋 𝙃𝙀𝙇𝙇𝙊 𝙏𝙃𝙀𝙍𝙀 {message.from_user.mention}</b> ❗ 𝙒𝙀𝙇𝘾𝙊𝙈𝙀 𝙏𝙊 𝙈𝙔 𝘽𝙊𝙏💞
-
-𝙏𝙃𝙄𝙎 𝙄𝙎 𝘼 𝘽𝙊𝙏 𝘿𝙀𝙎𝙄𝙂𝙉𝙀𝘿 𝙏𝙊 𝙋𝙇𝘼𝙔 𝙈𝙐𝙎𝙄𝘾 𝙄𝙉 𝙔𝙊𝙐𝙍 𝙂𝙍𝙊𝙐𝙋𝙎!
-
-𝙏𝙃𝙄𝙎 𝙄𝙎 𝘼 𝙋𝙍𝙄𝙑𝘼𝙏𝙀 𝙋𝙍𝙊𝙅𝙀𝘾𝙏 𝙊𝙁 [Wʜɪᴛᴇʜᴀᴛ](https://t.me/Somaliprogrammer)....𝙈𝘼𝘿𝙀 𝙒𝙄𝙏𝙃 ❤️
-
-𝙃𝙀𝙍𝙀 𝘼𝙍𝙀 𝙎𝙊𝙈𝙀 𝘾𝙈𝘿𝙎 𝙏𝙊 𝙐𝙎𝙀 𝙏𝙃𝙄𝙎 𝘽𝙊𝙏, 𝘾𝙇𝙄𝘾𝙆 » **/help**""",
-        reply_markup=InlineKeyboardMarkup(
-            [ 
-                [
-                    InlineKeyboardButton(
-                        "➕ ᴋᴜ ᴅᴀʀsᴏ ɢʀᴏᴜᴘᴋᴀᴅᴀ 📛 ➕", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
-                ],[
-                    InlineKeyboardButton(
-                        "​​Oᴡɴᴇʀ 🥀", url="https://t.me/@Somaliprogrammer"
-                    ),
-                    InlineKeyboardButton(
-                        "Sᴜᴘᴘᴏʀᴛ Cʜᴀᴛ 👥", url=f"https://t.me/{GROUP_SUPPORT}")
-                ],[
-                    InlineKeyboardButton(
-                        "❓Hᴏᴡ Tᴏ Usᴇ Mᴇ​ ❓​", callback_data="cbguide"
-                    )
-                ]
-            ]
-        ),
-     disable_web_page_preview=False
-    )
-
-
-@Client.on_message(command(["start", f"start@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
-async def start(client: Client, message: Message):
-    start = time()
-    current_time = datetime.utcnow()
-    uptime_sec = (current_time - START_TIME).total_seconds()
-    uptime = await _human_time_duration(int(uptime_sec))
-    delta_ping = time() - start
-    await message.reply_text(
-        f"""<b>☺️ **𝙃𝙀𝙇𝙇𝙊 {message.from_user.mention()}** ❗</b>
-
-✅ **𝙔𝙊,𝙄𝘼𝙈 𝘼𝙇𝙄𝙑𝙀 𝙓𝘿!
-• Start time: `{START_TIME_ISO}`
+⚪️ Assistant name >> @{ASSISTANT_NAME}\n\nClick next for instructions**
 """,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        "👥 𝙎𝙐𝙋𝙋𝙊𝙍𝙏", url=f"https://t.me/{GROUP_SUPPORT}"
-                    )
-                ]
-            ]
-        )
-    )
+        f"""
+**Setting up**
 
+1) Make bot admin (Group and in channel if use cplay)
+2) Start a voice chat
+3) Try /play [song name] for the first time by an admin
+*) If userbot joined enjoy music, If not add @{ASSISTANT_NAME} to your group and retry
 
-@Client.on_message(command(["help", f"help@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
-async def help(client: Client, message: Message):
-    await message.reply_text(
-        f"""<b>☺️ 𝙃𝙚𝙮 𝙔𝙤𝙤.. {message.from_user.mention()}</b>
-**Please press the button below to read the explanation and see the list of available commands !**
+**For Channel Music Play**
+1) Make me admin of your channel 
+2) Send /userbotjoinchannel in linked group
+3) Now send commands in linked group
+""",
+        f"""
+**Commands**
 
-🥀 Bot by @{OWNER_NAME}""",
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        text=" Hᴏᴡ Tᴏ Usᴇ Mᴇ", callback_data=f"cbguide"
-                    )
-                ]
-            ]
-        )
-    )
+**=>> Song Playing 🎧**
 
-@Client.on_message(command("help") & filters.private & ~filters.edited)
-async def help_(client: Client, message: Message):
-    await message.reply_text(
-        f"""<b>😇 **Hᴇʟʟᴏ {message.from_user.mention} welcome to the help menu !**</b>
+- /play: Play the requestd song
+- /play [yt url] : Play the given yt url
+- /play [reply yo audio]: Play replied audio
+- /splay: Play song via jio saavn
+- /ytplay: Directly play song via Youtube Music
 
-**__In this menu you can open several available command menus, in each command menu there is also a brief explanation of each command__**
+**=>> Playback ⏯**
 
-🦄 Bot by @{OWNER_NAME}""",
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        "𝙃𝙀𝙇𝙋", callback_data="cbguide"
-                    )
-                ]
-            ]
-        )
-    )
+- /player: Open Settings menu of player
+- /skip: Skips the current track
+- /pause: Pause track
+- /resume: Resumes the paused track
+- /end: Stops media playback
+- /mute: mute song play
+- /unmute: unmute song play
+- /current: Shows the current Playing track
+- /playlist: Shows playlist
 
+*Player cmd and all other cmds except /play, /current  and /playlist  are only for admins of the group.
+""",
+        f"""
+**=>> Channel Music Play 🛠**
 
-@Client.on_message(filters.command(["ping", f"ping@{BOT_USERNAME}"]) & ~filters.edited)
-@authorized_users_only
-async def ping_pong(client: Client, message: Message):
-    start = time()
-    m_reply = await message.reply_text("`Pinging...`")
-    current_time = datetime.utcnow()
-    uptime_sec = (current_time - START_TIME).total_seconds()
-    uptime = await _human_time_duration(int(uptime_sec))
-    delta_ping = time() - start
-    await m_reply.edit_text(
-        "**Pong !!**\n" 
-        f"**Time taken:** `{delta_ping * 1000:.3f} ms`\n"
-        f"**Service uptime:** `{uptime}`"
-    )
+⚪️ For linked group admins only:
 
+- /cplay [song name] - play song you requested
+- /csplay [song name] - play song you requested via jio saavn
+- /cplaylist - Show now playing list
+- /cccurrent - Show now playing
+- /cplayer - open music player settings panel
+- /cpause - pause song play
+- /cresume - resume song play
+- /cskip - play next song
+- /cend - stop music play
+- /cmute - mute song play
+- /mute - mute song play
+- /unmute - mute song play
+- /userbotjoinchannel - invite assistant to your chat
 
-@Client.on_message(command(["uptime", f"uptime@{BOT_USERNAME}"]) & ~filters.edited)
-@sudo_users_only
-async def get_uptime(client: Client, message: Message):
-    current_time = datetime.utcnow()
-    uptime_sec = (current_time - START_TIME).total_seconds()
-    uptime = await _human_time_duration(int(uptime_sec))
-    await message.reply_text(
-        "🤖 bot status:\n"
-        f"• **uptime:** `{uptime}`\n"
-        f"• **start time:** `{START_TIME_ISO}`"
-    )
+channel is also can be used instead of c ( /cplay = /channelplay )
+
+⚪️ If you donlt like to play in linked group:
+
+1) Get your channel ID.
+2) Create a group with tittle: Channel Music: your_channel_id
+3) Add bot as Channel admin with full perms
+4) Add @{ASSISTANT_NAME} to the channel as an admin.
+5) Simply send commands in your group. (remember to use /ytplay instead /play)
+""",
+        f"""
+**=>> More tools 🧑‍🔧**
+
+- /musicplayer [on/off]: Enable/Disable Music player
+- /admincache: Updates admin info of your group. Try if bot isn't recognize admin
+- /userbotjoin: Invite @{ASSISTANT_NAME} Userbot to your chat
+""",
+        f"""
+**=>> Song Download 🎸**
+
+- /video [song mame]: Download video song from youtube
+- /song [song name]: Download audio song from youtube
+- /saavn [song name]: Download song from saavn
+- /deezer [song name]: Download song from deezer
+
+**=>> Search Tools 📄**
+
+- /search [song name]: Search youtube for songs
+- /lyrics [song name]: Get song lyrics
+""",
+        f"""
+**=>> Commands for Sudo Users ⚔️**
+
+ - /userbotleaveall - remove assistant from all chats
+ - /broadcast <reply to message> - globally brodcast replied message to all chats
+ - /pmpermit [on/off] - enable/disable pmpermit message
+*Sudo Users can execute any command in any groups
+
+""",
+    ]
