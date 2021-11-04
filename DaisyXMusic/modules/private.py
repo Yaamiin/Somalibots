@@ -46,7 +46,7 @@ def _start(client, message):
                InlineKeyboardButton("Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ📝", url=f"https://t.me/{SUPPORT_GROUP}")
             ],
             [
-               InlineKeyboardButton("Oᴡɴᴇʀ:-🎁", url=f"https://{https://t.me/Somaliprogrammer}")
+               InlineKeyboardButton("Oᴡɴᴇʀ:-🎁", url=f"https://{SOURCE_CODE}")
            ]]
         ),
         reply_to_message_id=message.message_id,
