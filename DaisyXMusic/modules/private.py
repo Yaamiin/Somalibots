@@ -1,4 +1,4 @@
-# Daisyxmusic (Telegram bot project )
+https://t.me/Somaliprogrammer# Daisyxmusic (Telegram bot project )
 # Copyright (C) 2021  Inukaasith
 
 # This program is free software: you can redistribute it and/or modify
@@ -46,7 +46,7 @@ def _start(client, message):
                InlineKeyboardButton("Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ📝", url=f"https://t.me/{SUPPORT_GROUP}")
             ],
             [
-               InlineKeyboardButton("Oᴡɴᴇʀ:-🎁", url=f"https://{SOURCE_CODE}")
+               InlineKeyboardButton("Oᴡɴᴇʀ:-🎁", url=f"https://{https://t.me/Somaliprogrammer}")
            ]]
         ),
         reply_to_message_id=message.message_id,
