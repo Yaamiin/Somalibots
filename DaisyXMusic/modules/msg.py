@@ -18,7 +18,7 @@ from DaisyXMusic.config import ASSISTANT_NAME, PROJECT_NAME
 
 
 class Messages:
-    START_MSG = "**Hello 👋 [{}](tg://user?id={})!**\n\n🤖 I am an advanced bot created for playing music in the voice chats of Telegram Groups & Channels.\n\n✅ Send me /help for more info. [❤](https://telegra.ph/file/b85744e817cd61d906f71.jpg.jpg"
+    START_MSG = "**Hello 👋 [{}](tg://user?id={})!**\n\n🤖 I am an advanced bot created for playing music in the voice chats of Telegram Groups & Channels.\n\n✅ Send me /help for more info. [❤](https://telegra.ph/file/b85744e817cd61d906f71.jpg"
     HELP_MSG = [
         ".",
         f"""
