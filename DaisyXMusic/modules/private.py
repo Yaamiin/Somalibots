@@ -42,11 +42,11 @@ def _start(client, message):
                InlineKeyboardButton("➕ Add me to your Group 🙋‍♀️", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
             ],
             [
-               InlineKeyboardButton("📲 Updates", url=f"https://t.me/{UPDATES_CHANNEL}"),
-               InlineKeyboardButton("💬 Support", url=f"https://t.me/{SUPPORT_GROUP}")
+               InlineKeyboardButton("Uᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ-🇸🇴", url=f"https://t.me/{UPDATES_CHANNEL}"),
+               InlineKeyboardButton("Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ📝", url=f"https://t.me/{SUPPORT_GROUP}")
             ],
             [
-               InlineKeyboardButton("🛠 Source Code 🛠", url=f"https://{SOURCE_CODE}")
+               InlineKeyboardButton("Oᴡɴᴇʀ:-🎁", url=f"https://{SOURCE_CODE}")
            ]]
         ),
         reply_to_message_id=message.message_id,
@@ -57,7 +57,7 @@ def _start(client, message):
 async def gstart(_, message: Message):
     await message.reply_text(
         f"""**🔴 {PROJECT_NAME} is online**""",
-        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("💬 Support Chat", url=f"https://t.me/{SUPPORT_GROUP}")]])
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ📝", url=f"https://t.me/{SUPPORT_GROUP}")]])
     )
 
 
