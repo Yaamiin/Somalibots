@@ -611,12 +611,12 @@ async def play(_, message: Message):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("👥 𝙅𝙊𝙄𝙉 𝘿𝙃𝙀𝙃 ", url=f"https://t.me/somalibots"),
+                    InlineKeyboardButton("👥 𝙅𝙊𝙄𝙉 𝘿𝙃𝙀𝙃 ", url=f"https://t.me/sodhawadawll"),
                     InlineKeyboardButton("Menu ⏯ ", callback_data="menu"),
                 ],
                 [
-                    InlineKeyboardButton("Oᴡɴᴇʀ ", url=f"https://t.me/@AttackTor"),
-                    InlineKeyboardButton("Oᴡɴᴇʀ ", url=f"https://t.me/somalibots"),
+                    InlineKeyboardButton("Owner👿 ", url=f"https://t.me/yackabinugaas"),
+                    InlineKeyboardButton("Owner👿 ", url=f"https://t.me/wllmarwalibaiiduceey"),
                 ],
                 [InlineKeyboardButton(text="❌ Close", callback_data="cls")],
             ]
@@ -722,12 +722,12 @@ async def play(_, message: Message):
             keyboard = InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("👥 𝙅𝙊𝙄𝙉 𝘿𝙃𝙀𝙃 ", url=f"https://t.me/somalibots"),
+                        InlineKeyboardButton("👥 𝙅𝙊𝙄𝙉 𝘿𝙃𝙀𝙃 ", url=f"https://t.me/sodhawadawll"),
                         InlineKeyboardButton("Menu ⏯ ", callback_data="menu"),
                     ],
                     [
-                        InlineKeyboardButton("Oᴡɴᴇʀ", url=f"https://t.me/AttackTor"),
-                        InlineKeyboardButton("Oᴡɴᴇʀ ", url=f"https://t.me/somalibots"),
+                        InlineKeyboardButton("Owner👿", url=f"https://t.me/yackabinugaas"),
+                        InlineKeyboardButton("Owner👿 ", url=f"https://t.me/wllmarwalibaiiduceey"),
                     ],
                     [InlineKeyboardButton(text="❌ Close", callback_data="cls")],
                 ]
@@ -878,12 +878,12 @@ async def ytplay(_, message: Message):
     keyboard = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("👥 𝙅𝙊𝙄𝙉 𝘿𝙃𝙀𝙃 ", url=f"https://t.me/somalibots"),
+                InlineKeyboardButton("👥 𝙅𝙊𝙄𝙉 𝘿𝙃𝙀𝙃 ", url=f"https://t.me/sodhawadawll"),
                 InlineKeyboardButton("Menu ⏯ ", callback_data="menu"),
             ],
             [
-                InlineKeyboardButton("Oᴡɴᴇʀ", url=f"https://t.me/AttackTor"),
-                InlineKeyboardButton("Oᴡɴᴇʀ ", url=f"https://t.me/somalibots"),
+                InlineKeyboardButton("Owner👿", url=f"https://t.me/yackabinugaas"),
+                InlineKeyboardButton("Owner👿 ", url=f"https://t.me/wllmarwalibaiiduceey"),
             ],
             [InlineKeyboardButton(text="❌ Close", callback_data="cls")],
         ]
@@ -1134,12 +1134,12 @@ async def lol_cb(b, cb):
     keyboard = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("👥 𝙅𝙊𝙄𝙉 𝘿𝙃𝙀𝙃 ", url=f"https://t.me/somalibots"),
+                InlineKeyboardButton("👥 𝙅𝙊𝙄𝙉 𝘿𝙃𝙀𝙃 ", url=f"https://t.me/sodhawadawll"),
                 InlineKeyboardButton("Menu ⏯ ", callback_data="menu"),
             ],
             [
-                InlineKeyboardButton("Oᴡɴᴇʀ", url=f"https://t.me/AttackTor"),
-                InlineKeyboardButton("Oᴡɴᴇʀ ", url=f"https://t.me/somalibots"),
+                InlineKeyboardButton("Owner👿", url=f"https://t.me/yackabinugaas"),
+                InlineKeyboardButton("Owner👿 ", url=f"https://t.me/wllmarwalibaiiduceey"),
             ],
             [InlineKeyboardButton(text="❌ Close", callback_data="cls")],
         ]
