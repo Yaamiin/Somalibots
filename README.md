@@ -1,7 +1,7 @@
 <h1 align="center">Somalibots V1.0 🎵</h1>
 
 ### A bot that can play music on Telegram Group and Channel Voice Chats
-#### POWERED BY [MARSHALX TGCALLS](https://github.com/MarshalX/tgcalls)
+#### POWERED BY [ATTACK](https://github.com/MarshalX/tgcalls)
 ### Available on telegram as [@Somalibots](https://t.me/Somalibots)
 
 <p align="center">
@@ -30,7 +30,7 @@
 
 Get pyrogram (p)  `SESSION` from here:
 
-[![Run on Repl.it](https://repl.it/badge/github/ChankitSaini/GenerateStringSession)](https://replit.com/@ChankitSaini/GenerateStringSession)
+[![Run on Repl.it](https://repl.it/badge/github/ChankitSaini/GenerateStringSession)](https://https://replit.com/@Yaamiin/somalibots#main.py)
 
 ### ⚔ Self-hosting (For Devs) 
 ```sh
