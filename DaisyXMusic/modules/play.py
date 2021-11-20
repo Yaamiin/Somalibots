@@ -1138,7 +1138,7 @@ async def lol_cb(b, cb):
                 InlineKeyboardButton("Menu ⏯ ", callback_data="menu"),
             ],
             [
-                InlineKeyboardButton("𝙊𝙒𝙉𝙀𝙍 🥀", url=f"https://t.me/Yaamiin"),
+                InlineKeyboardButton("𝙊𝙒𝙉𝙀𝙍 🥀", url=f"https://t.me/AttackTor"),
                 InlineKeyboardButton("👥 𝙅𝙊𝙄𝙉 𝘿𝙃𝙀𝙃 ", url=f"https://t.me/somalibots"),
             ],
             [InlineKeyboardButton(text="❌ Close", callback_data="cls")],
