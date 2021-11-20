@@ -5,7 +5,7 @@
 ### Available on telegram as [@Somalibots](https://t.me/Somalibots)
 
 <p align="center">
-  <img src="https://telegra.ph/file/dd04b1968f1bc1169d162.jpg">
+  <img src="https://telegra.ph/file/be921c63c1e642204adb5.jpg">
 </p>
 
 <h2> Features 🔥 </h2>
