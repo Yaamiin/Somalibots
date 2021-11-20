@@ -615,7 +615,7 @@ async def play(_, message: Message):
                     InlineKeyboardButton("Menu ⏯ ", callback_data="menu"),
                 ],
                 [
-                    InlineKeyboardButton("𝙊𝙒𝙉𝙀𝙍 🥀", url=f"https://t.me/@Somaliprogrammer"),
+                    InlineKeyboardButton(" 🥀Masuulka ", url=f"https://t.me/@AttackTor"),
                     InlineKeyboardButton("👥 𝙅𝙊𝙄𝙉 𝘿𝙃𝙀𝙃 ", url=f"https://t.me/somalibots"),
                 ],
                 [InlineKeyboardButton(text="❌ Close", callback_data="cls")],
@@ -726,7 +726,7 @@ async def play(_, message: Message):
                         InlineKeyboardButton("Menu ⏯ ", callback_data="menu"),
                     ],
                     [
-                        InlineKeyboardButton("𝙊𝙒𝙉𝙀𝙍 🥀", url=f"https://t.me/Yaamiin"),
+                        InlineKeyboardButton("🥀MasuulKa⚡", url=f"https://t.me/AttackTor"),
                         InlineKeyboardButton("👥 𝙅𝙊𝙄𝙉 𝘿𝙃𝙀𝙃 ", url=f"https://t.me/somalibots"),
                     ],
                     [InlineKeyboardButton(text="❌ Close", callback_data="cls")],
@@ -812,7 +812,7 @@ async def ytplay(_, message: Message):
                 try:
                     await USER.join_chat(invitelink)
                     await USER.send_message(
-                        message.chat.id, "I joined this group for playing music in VC"
+                        message.chat.id, "waan imid qaraab hada dalbadaa dooqiina"
                     )
                     await lel.edit(
                         "<b>helper userbot joined your chat</b>",
@@ -882,7 +882,7 @@ async def ytplay(_, message: Message):
                 InlineKeyboardButton("Menu ⏯ ", callback_data="menu"),
             ],
             [
-                InlineKeyboardButton("𝙊𝙒𝙉𝙀𝙍 🥀", url=f"https://t.me/Yaamiin"),
+                InlineKeyboardButton(" 🥀 MasuulKa ⚡", url=f"https://t.me/AttackTor"),
                 InlineKeyboardButton("👥 𝙅𝙊𝙄𝙉 𝘿𝙃𝙀𝙃 ", url=f"https://t.me/somalibots"),
             ],
             [InlineKeyboardButton(text="❌ Close", callback_data="cls")],
